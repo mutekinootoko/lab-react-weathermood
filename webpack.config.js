@@ -38,7 +38,10 @@ module.exports = {
                                 ],
                                 'react'
                             ],
-                            plugins: ['transform-object-rest-spread']
+                            plugins: [
+                                'babel-plugin-transform-class-properties',
+                                'transform-object-rest-spread'
+                            ]
                         }
                     }
                 ]
