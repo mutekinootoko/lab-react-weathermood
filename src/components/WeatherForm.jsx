@@ -19,6 +19,7 @@ export default class WeatherForm extends React.Component {
     constructor(props) {
         super(props);
 
+        this.inputEl = null;
         this.state = {
             inputValue: props.city,
             tempToggle: false,
@@ -43,7 +44,7 @@ export default class WeatherForm extends React.Component {
         return (
             <div className='weather-form'>
                 <Form className='form-inline justify-content-center' onSubmit={this.handleSubmit}>
-                    <Input type='text' name='city' value={this.state.inputValue} onChange={this.handleInputChange}></Input>&nbsp;
+                    <Input type='text' name='city' getRef={el => {this.inputEl = el}} value={this.state.inputValue} onChange={this.handleInputChange}></Input>&nbsp;
                     <ButtonDropdown type='buttom' isOpen={this.state.tempToggle} toggle={this.handleTempToggle}>
                         <DropdownToggle type='button' caret color="secondary">
                             &ordm; {WeatherForm.getUnitString(this.state.unit)}
@@ -74,14 +75,12 @@ export default class WeatherForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        const inputEl = e.currentTarget.elements['city'];
-        inputEl.blur();
-        if (inputEl.value && inputEl.value.trim()) {
+        this.inputEl.blur();
+        if (this.state.inputValue && this.state.inputValue.trim()) {
             this.props.onQuery(this.state.inputValue, this.state.unit);
         } else {
-            inputEl.value = this.props.city;
+            this.state.inputEl = this.props.city;
         }
-
     }
 
     handleTempToggle(e) {

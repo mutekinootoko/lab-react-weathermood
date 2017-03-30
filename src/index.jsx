@@ -8,6 +8,7 @@ import './index.css'
 
 window.onload = function() {
     ReactDOM.render(
-        <Main />,
-        document.getElementById('root'));
-    };
+        <Main/>,
+        document.getElementById('root')
+    );
+};
