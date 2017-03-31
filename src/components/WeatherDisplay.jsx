@@ -3,6 +3,14 @@ import React from 'react';
 import './WeatherDisplay.css';
 
 export default class WeatherDisplay extends React.Component {
+    static propTypes = {
+        masking: React.PropTypes.bool,
+        group: React.PropTypes.string,
+        description: React.PropTypes.string,
+        temp: React.PropTypes.number,
+        unit: React.PropTypes.string
+    };
+
     constructor(props) {
         super(props);
 

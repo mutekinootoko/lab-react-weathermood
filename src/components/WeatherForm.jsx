@@ -12,6 +12,11 @@ import {
 import './WeatherForm.css';
 
 export default class WeatherForm extends React.Component {
+    static propTypes = {
+        city: React.PropTypes.string,
+        unit: React.PropTypes.string
+    };
+
     static getUnitString(unit) {
         return unit === 'metric' ? 'C' : 'F';
     }

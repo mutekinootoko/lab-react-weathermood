@@ -21,6 +21,14 @@ import {getWeather} from 'api/open-weather-map.js';
 import './weather.css';
 
 export default class Today extends React.Component {
+    static propTypes = {
+        masking: React.PropTypes.bool,
+        group: React.PropTypes.string,
+        description: React.PropTypes.string,
+        temp: React.PropTypes.number,
+        unit: React.PropTypes.string
+    };
+
     static getInitWeatherState() {
         return {
             city: 'na',
@@ -70,7 +78,7 @@ export default class Today extends React.Component {
         this.setState({
             loading: true,
             masking: true,
-            city: city // set city state immediately to prevent input text (in WeatherForm) from blinking; 
+            city: city // set city state immediately to prevent input text (in WeatherForm) from blinking;
         }, () => { // called back after setState completes
             getWeather(city, unit).then(weather => {
                 this.setState({
@@ -78,7 +86,7 @@ export default class Today extends React.Component {
                     loading: false
                 }, () => this.notifyUnitChange(unit));
             }).catch(err => {
-                console.log('Error getting weather', err);
+                console.error('Error getting weather', err);
 
                 this.setState({
                     ...Today.getInitWeatherState(unit),

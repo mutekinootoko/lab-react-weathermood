@@ -50,7 +50,7 @@ export function getWeather(city, unit) {
         }
     }).catch(function(err) {
         if (axios.isCancel(err)) {
-            console.log(err.message, err);
+            console.error(err.message, err);
         } else {
             throw err;
         }
