@@ -43,10 +43,10 @@ export default class Main extends React.Component {
                             <Collapse isOpen={this.state.navbarToggle} navbar>
                                 <Nav navbar>
                                     <NavItem>
-                                        <Link className='nav-link' to='/'>Today</Link>
+                                        <NavLink tag={Link} to='/'>Today</NavLink>
                                     </NavItem>
                                     <NavItem>
-                                        <Link className='nav-link' to='/forecast'>Forecast</Link>
+                                        <NavLink tag={Link} to='/forecast'>Forecast</NavLink>
                                     </NavItem>
                                 </Nav>
                                 <span className='navbar-text ml-auto'>DataLab</span>
