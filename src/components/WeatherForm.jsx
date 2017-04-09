@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     Form,
     Input,
@@ -13,8 +14,8 @@ import './WeatherForm.css';
 
 export default class WeatherForm extends React.Component {
     static propTypes = {
-        city: React.PropTypes.string,
-        unit: React.PropTypes.string
+        city: PropTypes.string,
+        unit: PropTypes.string
     };
 
     static getUnitString(unit) {
