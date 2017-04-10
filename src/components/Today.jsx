@@ -50,8 +50,6 @@ export default class Today extends React.Component {
         };
 
         this.handleFormQuery = this.handleFormQuery.bind(this);
-
-        this.maskInterval = null;
     }
 
     componentDidMount() {
@@ -96,8 +94,7 @@ export default class Today extends React.Component {
             });
         });
 
-        this.maskInterval = setInterval(() => {
-            clearInterval(this.maskInterval);
+        setTimeout(() => {
             this.setState({
                 masking: false
             });
