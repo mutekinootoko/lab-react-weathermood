@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 // TODO replace the key with yours
-const key = '36978c6550efee0e27e50850cc57adda';
+const key = 'dbb24fdd4ef086e081b8df071b00ae7d'; //dbb24fdd4ef086e081b8df071b00ae7d
 const baseUrl = `http://api.openweathermap.org/data/2.5/weather?appid=${key}`;
+const forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?&appid=${key}`;
 
 export function getWeatherGroup(code) {
     let group = 'na';
@@ -40,6 +41,7 @@ export function getWeather(city, unit) {
             throw new Error(res.data.message);
         } else {
             return {
+                
                 city: capitalize(city),
                 code: res.data.weather[0].id,
                 group: getWeatherGroup(res.data.weather[0].id),
@@ -62,7 +64,39 @@ export function cancelWeather() {
 }
 
 export function getForecast(city, unit) {
-    // TODO
+
+    var url = `${forecastUrl}&q=${encodeURIComponent(city)}&units=${unit}`;
+
+    console.log(`Making request to: ${url}`);
+
+    return axios.get(url, {cancelToken: weatherSource.token}).then(function(res) {
+ 
+        if (res.data.cod != 200) {
+            throw new Error(res.data.message);
+        } else { //4, 12, 20, 28, 36
+            var sub = [res.data.list[4], res.data.list[12],res.data.list[20],res.data.list[28],res.data.list[36]];
+            var ret = sub.map(function (obj, index) {
+                return { 
+                    idx: index,
+                    city: capitalize(city),
+                    code: obj.weather[0].id,
+                    group: getWeatherGroup(obj.weather[0].id),
+                    description: obj.weather[0].description,
+                    temp: obj.main.temp,
+                    unit: unit // or 'imperial'
+                };
+            });
+
+            return ret;
+            //debugger;
+        }
+    }).catch(function(err) {
+        if (axios.isCancel(err)) {
+            console.error(err.message, err);
+        } else {
+            throw err;
+        }
+    });
 }
 
 export function cancelForecast() {
