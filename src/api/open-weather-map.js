@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // TODO replace the key with yours
-const key = 'dbb24fdd4ef086e081b8df071b00ae7d'; //dbb24fdd4ef086e081b8df071b00ae7d
+const key = '';
 const baseUrl = `http://api.openweathermap.org/data/2.5/weather?appid=${key}`;
 const forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?&appid=${key}`;
 
